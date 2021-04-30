@@ -10,6 +10,14 @@ class Layer:
 
         self.__actual_layers = None
 
+    @property
+    def layer_name(self):
+        return self.__layer_name
+
+    @property
+    def count(self):
+        return self.__count
+
     def __get_layer_ordered_dict(self):
         return OrderedDict(
             {self.__layer_name + str(i + 1): self.__layer for i in range(self.__count)}

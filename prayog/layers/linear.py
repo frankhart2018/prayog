@@ -19,8 +19,6 @@ class Linear(Layer):
         self.__in_features = in_features
         self.__out_features = out_features
         self.__bias = bias
-        self.__layer_name = layer_name
-        self.__count = count
 
     def __call__(self, input_tensor):
         return super(Linear, self).__call__(input_tensor)
@@ -28,10 +26,10 @@ class Linear(Layer):
     def __str__(self):
         linear_str = ""
 
-        for count in range(self.__count):
+        for count in range(self.count):
             linear_str += (
                 "  \033[91m"
-                + self.__layer_name
+                + self.layer_name
                 + str(count + 1)
                 + "\033[m: "
                 + f"prayog.layers.Linear(in_features={self.__in_features}, out_features={self.__out_features}, bias={self.__bias}),\n"
