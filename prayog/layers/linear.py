@@ -46,8 +46,12 @@ class Linear(Layer):
 
     def incompatible_shape_input(self, shape, layer_number, prev_layer_type):
         expected_shape = shape[-1]
-        if prev_layer_type == "Conv2d":
-            expected_shape = shape[1] * shape[2] * shape[3]
+
+        if prev_layer_type in ["Conv2d", "MaxPool2d"]:
+            error.throw(
+                error_type="IncorrectLinearLayerError",
+                error_msg=f"Cannot pass feature maps from {prev_layer_type} without flattening to Linear layer"
+            )
 
         error.throw(
             error_type="IncorrectLinearLayerError",

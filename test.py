@@ -10,11 +10,13 @@ import prayog.models as models
 model = models.Sequential(
     layers.Conv2d(in_channels=1, out_channels=4, kernel_size=3, stride=1, padding=1),
     layers.Conv2d(in_channels=4, out_channels=4, kernel_size=3, stride=1, padding=1),
-    layers.MaxPool2d(kernel_size=2, stride=2),
+    layers.MaxPool2d(kernel_size=2, stride=2, count=3),
+    layers.Flatten(),
+    layers.Linear(in_features=36, out_features=1),
 )
 
-print(model)
-# print(model(torch.randn(1, 1, 28, 28)))
+# print(model)
+print(model(torch.randn(1, 1, 28, 28)))
 
 # layer = layers.Linear(
 #     in_features=10,
