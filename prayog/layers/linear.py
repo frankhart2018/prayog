@@ -12,7 +12,7 @@ class Linear(Layer):
         if count > 1 and in_features != out_features:
             error.throw(
                 error_type="IncorrectLinearLayerError",
-                error_msg="in_features should be equal to out_features when count is greater than 1"
+                error_msg="in_features should be equal to out_features when count is greater than 1",
             )
 
         super(Linear, self).__init__(
@@ -48,7 +48,7 @@ class Linear(Layer):
         expected_shape = shape[-1]
         if prev_layer_type == "Conv2d":
             expected_shape = shape[1] * shape[2] * shape[3]
-        
+
         error.throw(
             error_type="IncorrectLinearLayerError",
             error_msg=f"Expected in_features to be {expected_shape}, but got {self.__in_features} at layer/block #{layer_number} {self.layer_name}",

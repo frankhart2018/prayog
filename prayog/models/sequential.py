@@ -10,8 +10,11 @@ class Sequential:
             try:
                 out = layer(out)
             except RuntimeError as re:
-                layer.incompatible_shape_input(shape=out.size(), layer_number=layer_number+1, 
-                                               prev_layer_type=prev_layer.__class__.__name__)
+                layer.incompatible_shape_input(
+                    shape=out.size(),
+                    layer_number=layer_number + 1,
+                    prev_layer_type=prev_layer.__class__.__name__,
+                )
                 return None
 
             prev_layer = layer
