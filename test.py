@@ -8,12 +8,13 @@ import prayog.models as models
 
 # Sequential models
 model = models.Sequential(
-    layers.Linear(in_features=1, out_features=10),
-    layers.Linear(in_features=10, out_features=10),
+    layers.Conv2d(in_channels=1, out_channels=4, kernel_size=3, stride=1, padding=1),
+    layers.Conv2d(in_channels=4, out_channels=4, kernel_size=3, stride=1, padding=1),
+    layers.Linear(in_features=4*28*28, out_features=10),
 )
 
 # print(model)
-print(model(torch.randn(10, 1)))
+print(model(torch.randn(1, 1, 28, 28)).shape)
 
 # layer = layers.Linear(
 #     in_features=10,
