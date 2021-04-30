@@ -8,24 +8,9 @@ import prayog.models as models
 
 # Sequential models
 model = models.Sequential(
-    layers.Conv2d(in_channels=1, out_channels=4, kernel_size=3, stride=1, padding=1),
-    layers.Conv2d(in_channels=4, out_channels=4, kernel_size=3, stride=1, padding=1),
-    layers.MaxPool2d(kernel_size=2, stride=2, count=3),
-    layers.Flatten(),
-    layers.Linear(in_features=36, out_features=1),
+    layers.Linear(in_features=1, out_features=10),
+    layers.Linear(in_features="auto", out_features=10, count=3),
 )
 
-# print(model)
-print(model(torch.randn(1, 1, 28, 28)))
-
-# layer = layers.Linear(
-#     in_features=10,
-#     out_features=10,
-#     layer_name="fc",
-#     count=3
-# )
-
-# print(layer._Layer__actual_layers)
-# print(layer(torch.randn(10)))
-# print(layer._Layer__actual_layers)
-# print(layer(torch.randn(10)))
+print(model)
+print(model(torch.randn(1)))

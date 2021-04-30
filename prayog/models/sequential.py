@@ -1,6 +1,28 @@
+from prayog.layers import layer
+from prayog.utils import error
+import prayog.layers as layers
+
+
 class Sequential:
     def __init__(self, *args):
-        self.__layers = args
+        self.__layers = list(args)
+
+        for i in range(len(self.__layers)):
+            if i > 0 and self.__layers[i].__class__.__name__ == "Linear" and self.__layers[i].in_features == "auto":
+                in_features = 0
+                out_features = self.__layers[i].out_features
+                bias = self.__layers[i].bias
+
+                layer_name = self.__layers[i].layer_name
+                count = self.__layers[i].count
+
+                if self.__layers[i-1].__class__.__name__ == "Linear":
+                    in_features = self.__layers[i-1].out_features
+                elif self.__layers[i-1].__class__.__name__ in ["Conv2d", "MaxPool2d"]:
+                    in_features = 1
+
+                self.__layers[i] = layers.Linear(in_features=in_features, out_features=out_features, bias=bias,
+                                                 layer_name=layer_name, count=count )
 
     def __call__(self, input_tensor):
         out = input_tensor

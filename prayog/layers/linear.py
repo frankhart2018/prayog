@@ -9,15 +9,16 @@ class Linear(Layer):
     def __init__(
         self, in_features, out_features, bias=True, layer_name="linear", count=1
     ):
-        if count > 1 and in_features != out_features:
+        if count > 1 and in_features != "auto" and in_features != out_features:
             error.throw(
                 error_type="IncorrectLinearLayerError",
                 error_msg="in_features should be equal to out_features when count is greater than 1",
             )
 
+        mock_in_features = in_features if in_features != "auto" else 1
         super(Linear, self).__init__(
             layer=nn.Linear(
-                in_features=in_features, out_features=out_features, bias=bias
+                in_features=mock_in_features, out_features=out_features, bias=bias
             ),
             layer_name=layer_name,
             count=count,
@@ -26,6 +27,18 @@ class Linear(Layer):
         self.__in_features = in_features
         self.__out_features = out_features
         self.__bias = bias
+
+    @property
+    def in_features(self):
+        return self.__in_features
+
+    @property
+    def out_features(self):
+        return self.__out_features
+
+    @property
+    def bias(self):
+        return self.__bias
 
     def __call__(self, input_tensor):
         return super(Linear, self).__call__(input_tensor)
