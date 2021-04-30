@@ -9,6 +9,12 @@ class Linear(Layer):
     def __init__(
         self, in_features, out_features, bias=True, layer_name="linear", count=1
     ):
+        if count > 1 and in_features != out_features:
+            error.throw(
+                error_type="IncorrectLinearLayerError",
+                error_msg="in_features should be equal to out_features when count is greater than 1"
+            )
+
         super(Linear, self).__init__(
             layer=nn.Linear(
                 in_features=in_features, out_features=out_features, bias=bias
@@ -38,8 +44,12 @@ class Linear(Layer):
 
         return linear_str
 
-    def incompatible_shape_input(self, shape, layer_number):
+    def incompatible_shape_input(self, shape, layer_number, prev_layer_type):
+        expected_shape = shape[-1]
+        if prev_layer_type == "Conv2d":
+            expected_shape = shape[1] * shape[2] * shape[3]
+        
         error.throw(
             error_type="IncorrectLinearLayerError",
-            error_msg=f"Expected in_features to be {shape[-1]}, but got {self.__in_features} at layer #{layer_number} {self.layer_name}",
+            error_msg=f"Expected in_features to be {expected_shape}, but got {self.__in_features} at layer/block #{layer_number} {self.layer_name}",
         )

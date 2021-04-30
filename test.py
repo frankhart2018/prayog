@@ -14,7 +14,7 @@ model = models.Sequential(
 )
 
 # print(model)
-print(model(torch.randn(1, 1, 28, 28)).shape)
+print(model(torch.randn(1, 1, 28, 28)))
 
 # layer = layers.Linear(
 #     in_features=10,
