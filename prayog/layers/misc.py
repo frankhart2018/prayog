@@ -8,7 +8,7 @@ class Flatten(Layer):
         super(Flatten, self).__init__(
             layer=nn.Flatten(start_dim=start_dim, end_dim=end_dim),
             layer_name=layer_name,
-            count=count
+            count=count,
         )
 
         self.__start_dim = start_dim

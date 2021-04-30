@@ -50,7 +50,7 @@ class Linear(Layer):
         if prev_layer_type in ["Conv2d", "MaxPool2d"]:
             error.throw(
                 error_type="IncorrectLinearLayerError",
-                error_msg=f"Cannot pass feature maps from {prev_layer_type} without flattening to Linear layer"
+                error_msg=f"Cannot pass feature maps from {prev_layer_type} without flattening to Linear layer",
             )
 
         error.throw(

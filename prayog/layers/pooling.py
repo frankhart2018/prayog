@@ -16,10 +16,16 @@ class MaxPool2d(Layer):
         count=1,
     ):
         super(MaxPool2d, self).__init__(
-            layer=nn.MaxPool2d(kernel_size=kernel_size, stride=stride, padding=padding, dilation=dilation,
-                               return_indices=return_indices, ceil_mode=ceil_mode),
+            layer=nn.MaxPool2d(
+                kernel_size=kernel_size,
+                stride=stride,
+                padding=padding,
+                dilation=dilation,
+                return_indices=return_indices,
+                ceil_mode=ceil_mode,
+            ),
             layer_name=layer_name,
-            count=count
+            count=count,
         )
 
         self.__kernel_size = kernel_size
