@@ -1,3 +1,4 @@
+import torch.nn as nn
 from collections import OrderedDict
 
 
@@ -7,17 +8,17 @@ class Layer:
         self.__layer_name = layer_name
         self.__count = count
 
-        self.actual_layers = None
+        self.__actual_layers = None
 
     def __get_layer_ordered_dict(self):
         return OrderedDict({self.__layer_name + str(i+1): self.__layer for i in range(self.__count)})
 
     def __call__(self, input_tensor):
-        self.actual_layers = self.__get_layer_ordered_dict() if self.actual_layers == None else self.actual_layers
+        self.__actual_layers = self.__get_layer_ordered_dict() if self.__actual_layers == None else self.__actual_layers
 
         out = input_tensor
 
-        for layer_name, layer in self.actual_layers.items():
+        for layer_name, layer in self.__actual_layers.items():
             out = layer(out)
 
         return out
