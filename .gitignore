@@ -4,4 +4,4 @@ __pycache__
 .ipynb_checkpoints/
 build/
 dist/
-prayog-egg.info/
+prayog.egg-info/
