@@ -2,6 +2,7 @@ import torch.nn as nn
 from torch.nn.modules import linear
 
 from .layer import Layer
+from prayog.utils import error
 
 
 class Linear(Layer):
@@ -36,3 +37,9 @@ class Linear(Layer):
             )
 
         return linear_str
+
+    def incompatible_shape_input(self, shape, layer_number):
+        error.throw(
+            error_type="IncorrectLinearLayerError",
+            error_msg=f"Expected in_features to be {shape[-1]}, but got {self.__in_features} at layer #{layer_number} {self.layer_name}",
+        )

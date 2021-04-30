@@ -4,9 +4,14 @@ class Sequential:
 
     def __call__(self, input_tensor):
         out = input_tensor
+        prev_layer = None
 
-        for layer in self.__layers:
-            out = layer(out)
+        for layer_number, layer in enumerate(self.__layers):
+            try:
+                out = layer(out)
+            except RuntimeError as re:
+                layer.incompatible_shape_input(shape=out.size(), layer_number=layer_number)
+                return None
 
         return out
 
