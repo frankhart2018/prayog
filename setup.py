@@ -29,9 +29,7 @@ def get_version(rel_path):
 setup(
     name="prayog",
     version=get_version("prayog/__init__.py"),
-    description=(
-        "High level abstractions over PyTorch for faster experimentation"
-    ),
+    description=("High level abstractions over PyTorch for faster experimentation"),
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/frankhart2018/prayog",

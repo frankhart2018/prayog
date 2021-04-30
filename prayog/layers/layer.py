@@ -11,10 +11,16 @@ class Layer:
         self.__actual_layers = None
 
     def __get_layer_ordered_dict(self):
-        return OrderedDict({self.__layer_name + str(i+1): self.__layer for i in range(self.__count)})
+        return OrderedDict(
+            {self.__layer_name + str(i + 1): self.__layer for i in range(self.__count)}
+        )
 
     def __call__(self, input_tensor):
-        self.__actual_layers = self.__get_layer_ordered_dict() if self.__actual_layers == None else self.__actual_layers
+        self.__actual_layers = (
+            self.__get_layer_ordered_dict()
+            if self.__actual_layers == None
+            else self.__actual_layers
+        )
 
         out = input_tensor
 

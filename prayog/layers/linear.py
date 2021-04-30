@@ -5,11 +5,15 @@ from .layer import Layer
 
 
 class Linear(Layer):
-    def __init__(self, in_features, out_features, bias=True, layer_name="linear", count=1):
+    def __init__(
+        self, in_features, out_features, bias=True, layer_name="linear", count=1
+    ):
         super(Linear, self).__init__(
-            layer=nn.Linear(in_features=in_features, out_features=out_features, bias=bias),
+            layer=nn.Linear(
+                in_features=in_features, out_features=out_features, bias=bias
+            ),
             layer_name=layer_name,
-            count=count
+            count=count,
         )
 
         self.__in_features = in_features
@@ -24,7 +28,13 @@ class Linear(Layer):
     def __str__(self):
         linear_str = ""
 
-        for _ in range(self.__count):
-            linear_str += self.__layer_name + ": " + f"prayog.layers.Linear(in_features={self.__in_features}, out_features={self.__out_features}, bias={self.__bias}),\n"
+        for count in range(self.__count):
+            linear_str += (
+                "  \033[91m"
+                + self.__layer_name
+                + str(count + 1)
+                + "\033[m: "
+                + f"prayog.layers.Linear(in_features={self.__in_features}, out_features={self.__out_features}, bias={self.__bias}),\n"
+            )
 
         return linear_str
