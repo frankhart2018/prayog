@@ -11,6 +11,10 @@ class Layer:
         self.__actual_layers = None
 
     @property
+    def layer(self):
+        return self.__layer
+
+    @property
     def layer_name(self):
         return self.__layer_name
 

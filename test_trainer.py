@@ -30,7 +30,8 @@ model = models.Sequential(
     layers.Linear(in_features=3, out_features=1)
 )
 
+
 loss_fn = nn.MSELoss()
 optimizer = optim.Adam()
 
-trainer = train.Trainer(model=model)
+# trainer = train.Trainer(model=model)

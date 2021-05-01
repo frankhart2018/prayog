@@ -1,4 +1,5 @@
-from prayog.layers import layer
+import torch.nn as nn
+
 from prayog.utils import error
 import prayog.layers as layers
 
@@ -6,6 +7,7 @@ import prayog.layers as layers
 class Sequential:
     def __init__(self, *args):
         self.__layers = list(args)
+        self.__params = []
 
         for i in range(len(self.__layers)):
             if i > 0 and self.__layers[i].__class__.__name__ == "Linear" and self.__layers[i].in_features == "auto":
@@ -25,7 +27,9 @@ class Sequential:
                     )
 
                 self.__layers[i] = layers.Linear(in_features=in_features, out_features=out_features, bias=bias,
-                                                 layer_name=layer_name, count=count )
+                                                 layer_name=layer_name, count=count)
+
+            self.__params.extend(self.__layers[i].layer.parameters())
 
     def __call__(self, input_tensor):
         out = input_tensor
@@ -65,3 +69,7 @@ class Sequential:
         sequential_str += ")"
 
         return sequential_str
+
+    def parameters(self):
+        for param in self.__params:
+            yield param
