@@ -57,6 +57,9 @@ class Linear(Layer):
 
         return linear_str
 
+    def full_str(self):
+        return self.__str__()
+
     def incompatible_shape_input(self, shape, layer_number, prev_layer_type):
         expected_shape = shape[-1]
 

@@ -30,3 +30,17 @@ class Flatten(Layer):
             )
 
         return flatten_str
+
+    def full_str(self):
+        flatten_str = ""
+
+        for count in range(self.count):
+            flatten_str += (
+                "  \033[91m"
+                + self.layer_name
+                + str(count + 1)
+                + "\033[m: "
+                + f"prayog.layers.Flatten(start_dim={self.__start_dim}, end_dim={self.__end_dim}),\n"
+            )
+
+        return flatten_str

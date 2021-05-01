@@ -51,3 +51,19 @@ class MaxPool2d(Layer):
             )
 
         return maxpool_str
+
+    def full_str(self):
+        maxpool_str = ""
+
+        for count in range(self.count):
+            maxpool_str += (
+                "  \033[91m"
+                + self.layer_name
+                + str(count + 1)
+                + "\033[m: "
+                + f"prayog.layers.MaxPool2d(kernel_size={self.__kernel_size}, stride={self.__stride}, "
+                + f"padding={self.__padding}, dilation={self.__dilation}, return_indices={self.__return_indices}, "
+                + f"ceil_mode={self.__ceil_mode}),\n"
+            )
+
+        return maxpool_str

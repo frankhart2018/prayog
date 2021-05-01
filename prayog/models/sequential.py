@@ -18,8 +18,11 @@ class Sequential:
 
                 if self.__layers[i-1].__class__.__name__ == "Linear":
                     in_features = self.__layers[i-1].out_features
-                elif self.__layers[i-1].__class__.__name__ in ["Conv2d", "MaxPool2d"]:
-                    in_features = 1
+                elif self.__layers[i-1].__class__.__name__ in ["Conv2d", "MaxPool2d", "Flatten"]:
+                    error.throw(
+                        error_type="IncorrectAutoSpecificationError",
+                        error_msg=f"Cannot specify auto without providing Input shape when using {self.__layers[i-1].__class__.__name__}"
+                    )
 
                 self.__layers[i] = layers.Linear(in_features=in_features, out_features=out_features, bias=bias,
                                                  layer_name=layer_name, count=count )
@@ -48,6 +51,16 @@ class Sequential:
 
         for layer in self.__layers:
             sequential_str += str(layer)
+
+        sequential_str += ")"
+
+        return sequential_str
+
+    def longer_print(self):
+        sequential_str = "prayog.models.Sequential(\n"
+
+        for layer in self.__layers:
+            sequential_str += layer.full_str()
 
         sequential_str += ")"
 

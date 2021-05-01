@@ -1,3 +1,4 @@
+from prayog.layers import layer
 from prayog.layers.layer import Layer
 import torch.nn as nn
 import torch
@@ -8,9 +9,11 @@ import prayog.models as models
 
 # Sequential models
 model = models.Sequential(
-    layers.Linear(in_features=1, out_features=10),
-    layers.Linear(in_features="auto", out_features=10, count=3),
+    layers.Conv2d(in_channels=3, out_channels=5, kernel_size=3),
+    layers.MaxPool2d(kernel_size=2, stride=2),
+    layers.Flatten(),
+    layers.Linear(in_features="auto", out_features=10),
 )
 
-print(model)
-print(model(torch.randn(1)))
+print(model.longer_print())
+# print(model(torch.randn(1)))
