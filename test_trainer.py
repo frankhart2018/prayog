@@ -32,6 +32,6 @@ model = models.Sequential(
 
 
 loss_fn = nn.MSELoss()
-optimizer = optim.Adam()
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
 # trainer = train.Trainer(model=model)
