@@ -19,7 +19,7 @@ class Trainer:
             current_epoch_training_acc = 0
             current_epoch_training_loss = 0
 
-            for data in tqdm(train_loader, desc=f"Epoch: {epoch}"):
+            for data in tqdm(train_loader, desc=f"Epoch: {epoch+1}"):
                 input_data = data['input'].to(device)
                 label = data['label'].to(device)
 
