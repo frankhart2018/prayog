@@ -73,3 +73,13 @@ class Sequential:
     def parameters(self):
         for param in self.__params:
             yield param
+
+    def __set_train_mode(self, train_mode):
+        for layer in self.__layers:
+            layer.layer.train(train_mode)
+
+    def train(self):
+        self.__set_train_mode(train_mode=True)
+
+    def eval(self):
+        self.__set_train_mode(train_mode=False)
