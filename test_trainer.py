@@ -27,11 +27,13 @@ loader = data.DataLoader(dataset=dataset, batch_size=32, shuffle=True)
 
 model = models.Sequential(
     layers.Linear(in_features=3, out_features=10),
-    layers.Linear(in_features=3, out_features=1)
+    layers.Linear(in_features=10, out_features=1)
 )
 
 
 loss_fn = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
-# trainer = train.Trainer(model=model)
+trainer = train.Trainer(model=model, loss_fn=loss_fn, optimizer=optimizer)
+
+stats = trainer.train(train_loader=loader, epochs=2)

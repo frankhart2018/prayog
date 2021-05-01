@@ -14,13 +14,12 @@ class Trainer:
         
     def train(self, train_loader, epochs, device=torch.device("cpu")):
         training_size = len(train_loader.dataset)
-        self.__model.train()
 
         for epoch in range(epochs):
             current_epoch_training_acc = 0
             current_epoch_training_loss = 0
 
-            for data in tqdm(train_loader, desc="Batch"):
+            for data in tqdm(train_loader, desc=f"Epoch: {epoch}"):
                 input_data = data['input'].to(device)
                 label = data['label'].to(device)
 
@@ -39,7 +38,7 @@ class Trainer:
             current_epoch_training_acc /= training_size
 
             current_training_stats = self.__training_stats_tuple(
-                epoch=epoch,
+                epoch=epoch+1,
                 training_acc=current_epoch_training_acc,
                 training_loss=current_epoch_training_loss
             )
