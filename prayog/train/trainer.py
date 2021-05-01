@@ -15,6 +15,8 @@ class Trainer:
     def train(self, train_loader, epochs, device=torch.device("cpu")):
         training_size = len(train_loader.dataset)
 
+        self.__model.train()
+
         for epoch in range(epochs):
             current_epoch_training_acc = 0
             current_epoch_training_loss = 0
