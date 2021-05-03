@@ -45,5 +45,5 @@ setup(
         "Programming Language :: Python :: 3.6",
     ],
     packages=[package for package in find_packages()],
-    install_requires=["torch", "tqdm"],
+    install_requires=["torch", "torchvision", "tqdm"],
 )
